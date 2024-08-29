@@ -1,0 +1,9 @@
+.app-container {
+    display: flex;
+    height: 100vh; // Ajusta la altura según tus necesidades
+  }
+  
+  .content-container {
+    flex: 1; // Ocupar el espacio restante
+    padding: 1rem; // Ajusta el espaciado según tus necesidades
+  }
