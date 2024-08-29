@@ -32,49 +32,8 @@ export const DELETE_USER = gql`
 // Donante
 
 export const CREATE_DONANTE = gql`
-  mutation createDonante(
-    $tipo: String,
-    $firstName: String,
-    $lastName: String,
-    $edad: Int,
-    $direccion: String,
-    $ocupacion: String,
-    $partos: Int,
-    $cesareas: Int,
-    $apellidosRNLactante: String,
-    $sdg: Int,
-    $fechaNacimRN: String,
-    $complicacionesEmbarazo: String,
-    $transfusionesUltimos5Anos: String,
-    $tatuajesPiercingsAcupunturaUltimoAno: String,
-    $tratamientoMedico: String,
-    $pruebaRapidaSifilis: String,
-    $pruebaRapidaVIH: String,
-    $pruebaRapidaHepatitisC: String,
-    $observaciones: String
-  ) {
-    createDonante(
-      tipo: $tipo,
-      firstName: $firstName,
-      lastName: $lastName,
-      edad: $edad,
-      direccion: $direccion,
-      ocupacion: $ocupacion,
-      partos: $partos,
-      cesareas: $cesareas,
-      apellidosRNLactante: $apellidosRNLactante,
-      sdg: $sdg,
-      fechaNacimRN: $fechaNacimRN,
-      complicacionesEmbarazo: $complicacionesEmbarazo,
-      transfusionesUltimos5Anos: $transfusionesUltimos5Anos,
-      tatuajesPiercingsAcupunturaUltimoAno: $tatuajesPiercingsAcupunturaUltimoAno,
-      tratamientoMedico: $tratamientoMedico,
-      pruebaRapidaSifilis: $pruebaRapidaSifilis,
-      pruebaRapidaVIH: $pruebaRapidaVIH,
-      pruebaRapidaHepatitisC: $pruebaRapidaHepatitisC,
-      observaciones: $observaciones
-
-    ) {
+  mutation createDonante($input: DonanteInput!) {
+    createDonante(input: $input) {
       tipo
       firstName
       lastName

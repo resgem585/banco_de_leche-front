@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { SignUpForm } from './components/SignUpForm';
 import { Home } from './pages/Home';
+import { Donante } from './pages/Donante';
 
 function App() {
   const client = new ApolloClient({
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<Login />} />
           <Route path="/create" element={<SignUpForm />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/donante" element={<Donante />} />
         </Routes>
       </ApolloProvider>
     </Router>
