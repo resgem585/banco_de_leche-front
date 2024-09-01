@@ -1,0 +1,164 @@
+body {
+    font-size: .875rem;
+  }
+  
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  th, td {
+    width: 20%; /* Ajusta este valor según el número de columnas */
+    text-align: center;
+  }
+  
+  .table th.action-header {
+    text-align: right; /* Align header text to the right */
+    display: flex; /* Enable flexbox for the header cell */
+    justify-content: flex-end; /* Align action buttons to the right */
+    /* Additional styling for spacing and alignment */
+    padding-right: 20px; /* Add right padding for spacing */
+    width: 150px; /* Set a fixed width for the action header */
+  }
+  
+  .action-buttons {
+    display: flex; /* Enable flexbox for the button container */
+    align-items: center; /* Align buttons vertically in the center */
+    flex-grow: 1; /* Allow buttons to expand and fill available space */
+    justify-content: flex-end; /* Align buttons to the right edge */
+  }
+  
+  .action-buttons button,
+  .action-buttons a {
+    margin-left: 5px; /* Add spacing between buttons */
+    /* Additional styling for the buttons */
+    padding: 5px 10px; /* Add padding to buttons */
+    border-radius: 4px; /* Add rounded corners */
+  }
+  
+  .action-buttons a {
+    text-decoration: none; /* Remove default link underline */
+    padding: 5px 10px; /* Add padding to links */
+    border-radius: 4px; /* Add rounded corners */
+    background-color: #eee; /* Add subtle background color to links */
+  }
+  
+  .feather {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /*
+   * Sidebar
+   */
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    /* rtl:raw:
+    right: 0;
+    */
+    bottom: 0;
+    /* rtl:remove */
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+  
+  @media (max-width: 767.98px) {
+    .sidebar {
+      top: 5rem;
+    }
+  }
+  
+  .sidebar-sticky {
+    height: calc(100vh - 48px);
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #727272;
+  }
+  
+  .sidebar .nav-link.active {
+    color: #2470dc;
+  }
+  
+  .sidebar .nav-link:hover .feather,
+  .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+  
+  .sidebar-heading {
+    font-size: .75rem;
+  }
+  
+  /*
+   * Navbar
+   */
+  
+  .navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+  }
+  
+  .navbar .navbar-toggler {
+    top: .25rem;
+    right: 1rem;
+  }
+  
+  .navbar .form-control {
+    padding: .75rem 1rem;
+  }
+  
+  .navbar .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+  
+  .form-control-dark {
+    color: black;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+  }
+  
+  .form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+  }
+  
+  /* --- Custom Styles for Form Inputs --- */
+  
+  .form-control {
+    border: 2px solid #000; /* Borde negro sólido */
+    border-radius: 4px; /* Esquinas redondeadas */
+    padding: 5px 10px; /* Espaciado interno para el contenido */
+  }
+  
+  label {
+    font-weight: bold; /* Hacer que el texto del label sea en negrita */
+  }
+  
+  .form-control:focus {
+    border-color: #2470dc; /* Cambia el color del borde al enfocarse */
+    box-shadow: 0 0 5px rgba(36, 112, 220, .5); /* Sombra azul clara */
+  }
+  
+  /* --- Optional: Additional Styles for Form Labels --- */
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  
