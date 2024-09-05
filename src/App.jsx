@@ -4,6 +4,7 @@ import { Login } from './pages/Login';
 import { SignUpForm } from './components/SignUpForm';
 import { Home } from './pages/Home';
 import { Donante } from './pages/Donante';
+import { ListaDonadoras } from './pages/ListaDonadoras';
 
 function App() {
   const client = new ApolloClient({
@@ -19,6 +20,7 @@ function App() {
           <Route path="/create" element={<SignUpForm />} />
           <Route path="/home" element={<Home />} />
           <Route path="/donante" element={<Donante />} />
+          <Route path="/listaDonadoras" element={<ListaDonadoras />} />
         </Routes>
       </ApolloProvider>
     </Router>

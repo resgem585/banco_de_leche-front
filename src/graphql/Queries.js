@@ -13,8 +13,8 @@ query login($email:String, $password: String){
 // Donante
 
 export const GET_DONANTES = gql`
-  query getDonantes {
-    getDonantes {
+  query donantes {
+    donantes {
     _id 
     tipo
     firstName
@@ -22,8 +22,8 @@ export const GET_DONANTES = gql`
   }
 `;
 export const GET_DONANTE = gql`
-  query getDonante($id: ID!) {
-    getDonante(id: $id) {
+  query donante($id: ID!) {
+    donante(id: $id) {
       _id
       tipo
       firstName
