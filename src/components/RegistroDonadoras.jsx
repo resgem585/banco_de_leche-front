@@ -10,7 +10,7 @@ const RegistroDonadoras = () => {
 
   const handleDeleteDonante = async (donanteId) => {
     try {
-      await deleteDonante({ variables: { _id: donanteId } });
+      await deleteDonante({ variables: { _id: donanteId } }); // Cambia _id a id
       refetch(); // Refetch the donor list after deletion
     } catch (error) {
       console.error("Error deleting donor:", error);
@@ -19,11 +19,6 @@ const RegistroDonadoras = () => {
 
   if (loading) return "Cargando donantes...";
   if (error) return `Error: ${error.message}`;
-
-  // Verificar si los datos existen antes de usar .map()
-  if (!data || !data.donantes) {
-    return <div>No se encontraron donantes.</div>;
-  }
 
   return (
     <div>
@@ -45,7 +40,6 @@ const RegistroDonadoras = () => {
               <td>{donante.firstName}</td>
               <td>{donante.lastName}</td>
               <td>{donante.sdg}</td>
-              {/* Action buttons grouped in a separate cell */}
               <td>
                 <div className="action-buttons-container">
                   <div className="action-buttons">
@@ -64,7 +58,7 @@ const RegistroDonadoras = () => {
                     </Link>
                     <button
                       className="btn btn-danger"
-                      onClick={() => handleDeleteDonante(donante._id)}
+                      onClick={() => handleDeleteDonante(donante._id)} // Cambia _id a id
                     >
                       <i className="bi bi-trash"></i> Borrar
                     </button>

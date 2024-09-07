@@ -4,13 +4,18 @@ import { GET_DONANTE } from '../graphql/Queries';
 import moment from 'moment';
 
 const DonanteDetails = () => {
-  const { id } = useParams();
+  const { _id } = useParams();
   const { loading, error, data } = useQuery(GET_DONANTE, {
-    variables: { id },
+    variables: { _id },
   });
 
   if (loading) return "Cargando detalles de la donante...";
   if (error) return `Error: ${error.message}`;
+
+  // Verifica que los datos y el objeto getDonante existen antes de acceder a sus campos
+  if (!data || !data.getDonante) {
+    return <div>No se encontraron detalles de la donante.</div>;
+  }
 
   const donante = data.getDonante;
 
@@ -75,147 +80,19 @@ const DonanteDetails = () => {
             <div className="col">{donante.firstName}</div>
           </div>
         </li>
+        {/* Otros campos */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Edad:</b>
-            </div>
-            <div className="col">{donante.edad}</div>
+            <div className="col" style={{ maxWidth: '140px' }}><b>Fecha de Creación:</b></div>
+            <div className="col">{new Date(donante.createdAt).toLocaleString()}</div>
           </div>
         </li>
         <li className="list-group-item">
           <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Dirección:</b>
-            </div>
-            <div className="col">{donante.direccion}</div>
+            <div className="col" style={{ maxWidth: '140px' }}><b>Última Modificación:</b></div>
+            <div className="col">{new Date(donante.updatedAt).toLocaleString()}</div>
           </div>
         </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Ocupación:</b>
-            </div>
-            <div className="col">{donante.ocupacion}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Partos:</b>
-            </div>
-            <div className="col">{donante.partos}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Cesareas:</b>
-            </div>
-            <div className="col">{donante.cesareas}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Apellidos RN/Lactante:</b>
-            </div>
-            <div className="col">{donante.apellidosRNLactante}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>SDG:</b>
-            </div>
-            <div className="col">{donante.sdg}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Fecha Nacimiento RN:</b>
-            </div>
-            <div className="col">{donante.fechaNacimRN}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Complicaciones Embarazo:</b>
-            </div>
-            <div className="col">{donante.complicacionesEmbarazo}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Transfusiones Últimos 5 Años:</b>
-            </div>
-            <div className="col">{donante.transfusionesUltimos5Anos}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Tatuajes, Piercings, Acupuntura Último Año:</b>
-            </div>
-            <div className="col">{donante.tatuajesPiercingsAcupunturaUltimoAno}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Tratamiento Médico:</b>
-            </div>
-            <div className="col">{donante.tratamientoMedico}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Prueba Rápida Sífilis:</b>
-            </div>
-            <div className="col">{donante.pruebaRapidaSifilis}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Prueba Rápida VIH:</b>
-            </div>
-            <div className="col">{donante.pruebaRapidaVIH}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Prueba Rápida Hepatitis C:</b>
-            </div>
-            <div className="col">{donante.pruebaRapidaHepatitisC}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="row">
-            <div className="col" style={{ maxWidth: '140px' }}>
-              <b>Observaciones:</b>
-            </div>
-            <div className="col">{donante.observaciones}</div>
-          </div>
-        </li>
-        <li className="list-group-item">
-  <div className="row">
-    <div className="col" style={{ maxWidth: '140px' }}><b>Fecha de Creación:</b></div>
-    <div className="col">{new Date(donante.createdAt).toLocaleString()}</div>
-  </div>
-</li>
-<li className="list-group-item">
-  <div className="row">
-    <div className="col" style={{ maxWidth: '140px' }}><b>Última Modificación:</b></div>
-    <div className="col">{new Date(donante.updatedAt).toLocaleString()}</div>
-  </div>
-</li>
-        {/* Repeat the structure for the rest of the fields */}
       </ul>
     </div>
   );

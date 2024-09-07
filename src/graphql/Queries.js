@@ -18,6 +18,8 @@ export const GET_DONANTES = gql`
     _id 
     tipo
     firstName
+    lastName
+    sdg
     }
   }
 `;
@@ -27,6 +29,25 @@ export const GET_DONANTE = gql`
       _id
       tipo
       firstName
+      lastName
+      edad
+      direccion
+      ocupacion
+      partos
+      cesareas
+      apellidosRNLactante
+      sdg
+      fechaNacimRN
+      complicacionesEmbarazo
+      transfusionesUltimos5Anos
+      tatuajesPiercingsAcupunturaUltimoAno
+      tratamientoMedico
+      pruebaRapidaSifilis
+      pruebaRapidaVIH
+      pruebaRapidaHepatitisC
+      observaciones
+      createdAt
+      updatedAt
     }
   }
 `;
