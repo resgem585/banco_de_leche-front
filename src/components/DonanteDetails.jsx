@@ -24,12 +24,9 @@ const DonanteDetails = () => {
         <h1 className="h2">{donante.lastName} {donante.firstName}</h1>
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
-            <button type="button" className="btn btn-sm btn-outline-secondary">
-              Compartir
-            </button>
-            <button type="button" className="btn btn-sm btn-outline-secondary">
-              Exportar
-            </button>
+            <Link to={`/agregarControl/${donante._id}`} className="btn btn-sm btn-primary">
+              Agregar Control
+            </Link>
           </div>
         </div>
       </div>
@@ -77,6 +74,14 @@ const DonanteDetails = () => {
               <b>Nombre:</b>
             </div>
             <div className="col">{donante.firstName}</div>
+          </div>
+        </li>
+        <li className="list-group-item">
+          <div className="row">
+            <div className="col" style={{ maxWidth: '140px' }}>
+              <b>sdg</b>
+            </div>
+            <div className="col">{donante.sdg}</div>
           </div>
         </li>
         <li className="list-group-item">

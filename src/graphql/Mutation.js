@@ -91,6 +91,44 @@ export const DELETE_DONANTE = gql`
     deleteDonante(id: $id)
   }
 `;
+
+// Control
+
+export const CREATE_CONTROL = gql`
+  mutation CreateControl($input: ControlInput!) {
+    createControl(input: $input) {
+      _id
+      numeroLeche
+      tipoLeche
+      tipoDonacion
+      donadora
+      ml
+      fechaExtraccion
+      horaExtraccion
+      sdg
+      embalaje
+      suciedad
+      color
+      olor
+      crematocrito
+      acidezDornic
+      observaciones
+      donante {
+        _id
+        firstName
+        lastName
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+
+
+
+
+
 // Calidad
 
 export const CREATE_CALIDAD = gql`
