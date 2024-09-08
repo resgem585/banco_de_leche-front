@@ -4,20 +4,19 @@ import { GET_DONANTE } from '../graphql/Queries';
 import moment from 'moment';
 
 const DonanteDetails = () => {
-  const { _id } = useParams();
+  const { id } = useParams();  // Aquí usa `id`
   const { loading, error, data } = useQuery(GET_DONANTE, {
-    variables: { _id },
+    variables: { id },  // Asegúrate de que coincida con la variable de la consulta
   });
 
   if (loading) return "Cargando detalles de la donante...";
   if (error) return `Error: ${error.message}`;
 
-  // Verifica que los datos y el objeto getDonante existen antes de acceder a sus campos
-  if (!data || !data.getDonante) {
+  if (!data || !data.donante) {
     return <div>No se encontraron detalles de la donante.</div>;
   }
 
-  const donante = data.getDonante;
+  const donante = data.donante;
 
   return (
     <div className="container">
@@ -80,7 +79,6 @@ const DonanteDetails = () => {
             <div className="col">{donante.firstName}</div>
           </div>
         </li>
-        {/* Otros campos */}
         <li className="list-group-item">
           <div className="row">
             <div className="col" style={{ maxWidth: '140px' }}><b>Fecha de Creación:</b></div>
@@ -96,6 +94,6 @@ const DonanteDetails = () => {
       </ul>
     </div>
   );
-}
+};
 
 export default DonanteDetails;

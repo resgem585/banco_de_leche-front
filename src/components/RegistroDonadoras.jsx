@@ -10,7 +10,7 @@ const RegistroDonadoras = () => {
 
   const handleDeleteDonante = async (donanteId) => {
     try {
-      await deleteDonante({ variables: { _id: donanteId } }); // Cambia _id a id
+      await deleteDonante({ variables: { id: donanteId } });  // Usa `id`
       refetch(); // Refetch the donor list after deletion
     } catch (error) {
       console.error("Error deleting donor:", error);

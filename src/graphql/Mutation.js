@@ -87,10 +87,8 @@ export const UPDATE_DONANTE = gql`
   }
 `;
 export const DELETE_DONANTE = gql`
-  mutation deleteDonante($_id: ID!) {
-    deleteDonante(_id: $_id) {
-    _id
-    }
+  mutation deleteDonante($id: ID!) {
+    deleteDonante(id: $id)
   }
 `;
 // Calidad
