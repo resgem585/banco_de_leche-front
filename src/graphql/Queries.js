@@ -13,20 +13,41 @@ query login($email:String, $password: String){
 // Donante
 
 export const GET_DONANTES = gql`
-  query getDonantes {
-    getDonantes {
+  query donantes {
+    donantes {
     _id 
     tipo
     firstName
+    lastName
+    sdg
     }
   }
 `;
 export const GET_DONANTE = gql`
-  query getDonante($id: ID!) {
-    getDonante(id: $id) {
+  query donante($id: ID!) {
+    donante(id: $id) {
       _id
       tipo
       firstName
+      lastName
+      edad
+      direccion
+      ocupacion
+      partos
+      cesareas
+      apellidosRNLactante
+      sdg
+      fechaNacimRN
+      complicacionesEmbarazo
+      transfusionesUltimos5Anos
+      tatuajesPiercingsAcupunturaUltimoAno
+      tratamientoMedico
+      pruebaRapidaSifilis
+      pruebaRapidaVIH
+      pruebaRapidaHepatitisC
+      observaciones
+      createdAt
+      updatedAt
     }
   }
 `;

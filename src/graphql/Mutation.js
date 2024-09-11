@@ -24,8 +24,6 @@ export const DELETE_USER = gql`
   mutation deleteUser($_id: ID) {
     deleteUser(_id: $_id) {
       _id
-      email
-      password
     }
   }
 `;
@@ -58,50 +56,13 @@ export const CREATE_DONANTE = gql`
 `;
 export const UPDATE_DONANTE = gql`
   mutation updateDonante(
-    $_id: ID!,
-    $tipo: String,
-    $firstName: String,
-    $lastName: String,
-    $edad: Int,
-    $direccion: String,
-    $ocupacion: String,
-    $partos: Int,
-    $cesareas: Int,
-    $apellidosRNLactante: String,
-    $sdg: Int,
-    $fechaNacimRN: String,
-    $complicacionesEmbarazo: String,
-    $transfusionesUltimos5Anos: String,
-    $tatuajesPiercingsAcupunturaUltimoAno: String,
-    $tratamientoMedico: String,
-    $pruebaRapidaSifilis: String,
-    $pruebaRapidaVIH: String,
-    $pruebaRapidaHepatitisC: String,
-    $observaciones: String
-    
+    $id: ID!,
+    $input: DonanteInput!
   ) {
     updateDonante(
-      _id: $_id,
-      tipo: $tipo,
-      firstName: $firstName,
-      lastName: $lastName,
-      edad: $edad,
-      direccion: $direccion,
-      ocupacion: $ocupacion,
-      partos: $partos,
-      cesareas: $cesareas,
-      apellidosRNLactante: $apellidosRNLactante,
-      sdg: $sdg,
-      fechaNacimRN: $fechaNacimRN,
-      complicacionesEmbarazo: $complicacionesEmbarazo,
-      transfusionesUltimos5Anos: $transfusionesUltimos5Anos,
-      tatuajesPiercingsAcupunturaUltimoAno: $tatuajesPiercingsAcupunturaUltimoAno,
-      tratamientoMedico: $tratamientoMedico,
-      pruebaRapidaSifilis: $pruebaRapidaSifilis,
-      pruebaRapidaVIH: $pruebaRapidaVIH,
-      pruebaRapidaHepatitisC: $pruebaRapidaHepatitisC,
-      observaciones: $observaciones
-    ) {
+      id: $id,
+      input: $input
+    ) { 
       _id
       tipo
       firstName
@@ -126,31 +87,48 @@ export const UPDATE_DONANTE = gql`
   }
 `;
 export const DELETE_DONANTE = gql`
-  mutation deleteDonante($_id: ID!) {
-    deleteDonante(_id: $_id) {
+  mutation deleteDonante($id: ID!) {
+    deleteDonante(id: $id)
+  }
+`;
+
+// Control
+
+export const CREATE_CONTROL = gql`
+  mutation CreateControl($input: ControlInput!) {
+    createControl(input: $input) {
       _id
-      tipo
-      firstName
-      lastName
-      edad
-      direccion
-      ocupacion
-      partos
-      cesareas
-      apellidosRNLactante
+      numeroLeche
+      tipoLeche
+      tipoDonacion
+      donadora
+      ml
+      fechaExtraccion
+      horaExtraccion
       sdg
-      fechaNacimRN
-      complicacionesEmbarazo
-      transfusionesUltimos5Anos
-      tatuajesPiercingsAcupunturaUltimoAno
-      tratamientoMedico
-      pruebaRapidaSifilis
-      pruebaRapidaVIH
-      pruebaRapidaHepatitisC
+      embalaje
+      suciedad
+      color
+      olor
+      crematocrito
+      acidezDornic
       observaciones
+      donante {
+        _id
+        firstName
+        lastName
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
+
+
+
+
+
+
 // Calidad
 
 export const CREATE_CALIDAD = gql`
