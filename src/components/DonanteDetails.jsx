@@ -27,9 +27,16 @@ const DonanteDetails = () => {
         </h1>
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
-            <Link to={`/agregarControl/${donante._id}`} className="btn btn-sm btn-primary">
-              Agregar Control
-            </Link>
+            {/* Botón dinámico dependiendo de si existe un control o no */}
+            {controlId ? (
+              <Link to={`/ControlDetalles/${controlId}`} className="btn btn-sm btn-primary">
+                Ver Control
+              </Link>
+            ) : (
+              <Link to={`/agregarControl/${donante._id}`} className="btn btn-sm btn-primary">
+                Agregar Control
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -230,15 +237,6 @@ const DonanteDetails = () => {
           </div>
         </li>
       </ul>
-
-      {/* Agregar el botón "Ver Control" utilizando el controlId */}
-      {controlId && (
-        <div className="mt-3">
-          <Link to={`/ControlDetalles/${controlId}`} className="btn btn-primary">
-            Ver Control
-          </Link>
-        </div>
-      )}
     </div>
   );
 };
