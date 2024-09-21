@@ -121,43 +121,39 @@ export const CREATE_CONTROL = gql`
       createdAt
       updatedAt
     }
-  }
+  },
 `;
 
 
 
 
 
-
-// Calidad
-
-export const CREATE_CALIDAD = gql`
-  mutation CREATE_CALIDAD($donante: ID!, $olor: String!) {
-  createCalidad(donante: $donante, olor: $olor) {
-    _id
-    donante {
+export const UPDATE_CONTROL = gql`
+  mutation updateControl($id: ID!, $input: ControlInput!) {
+    updateControl(id: $id, input: $input) {
       _id
-      firstName
-    }
-   
-  }
-}
-`;
-
-export const UPDATE_CALIDAD = gql`
-  mutation updateCalidad($_id: ID!, $donante: String, $olor: String) {
-    updateCalidad(_id: $_id, donante: $donante, olor: $olor) {
-      _id
-      donante
+      numeroLeche
+      tipoLeche
+      tipoDonacion
+      donadora
+      ml
+      fechaExtraccion
+      horaExtraccion
+      sdg
+      embalaje
+      suciedad
+      color
       olor
-    }
-  }
-`;
-
-export const DELETE_CALIDAD = gql`
-  mutation deleteCalidad($_id: ID!) {
-    deleteCalidad(_id: $_id) {
-      _id
+      crematocrito
+      acidezDornic
+      observaciones
+      donante {
+        _id
+        firstName
+        lastName
+      }
+      createdAt
+      updatedAt
     }
   }
 `;

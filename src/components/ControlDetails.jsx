@@ -1,23 +1,23 @@
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-import { GET_CONTROL_POR_DONANTE } from '../graphql/Queries';  // Asegúrate de que esté importada la consulta correcta
+import { GET_CONTROL } from '../graphql/Queries';
 import moment from 'moment';
 
 const ControlDetails = () => {
-  const { id: donanteId } = useParams();  // El ID del donante lo tomas de los parámetros
+  const { id: controlId } = useParams(); // Obtener el controlId desde la URL
 
-  const { loading, error, data } = useQuery(GET_CONTROL_POR_DONANTE, {
-    variables: { donanteId },
+  const { loading, error, data } = useQuery(GET_CONTROL, {
+    variables: { id: controlId },
   });
 
   if (loading) return <p>Cargando detalles del control...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  if (!data || !data.controlPorDonante) {
+  if (!data || !data.control) {
     return <p>No hay control disponible.</p>;
   }
 
-  const control = data.controlPorDonante;
+  const control = data.control;
 
   return (
     <div className="container">

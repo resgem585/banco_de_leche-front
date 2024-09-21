@@ -5,9 +5,10 @@ import { SignUpForm } from './components/SignUpForm';
 import { Home } from './pages/Home';
 import { Donante } from './pages/Donante';
 import { ListaDonadoras } from './pages/ListaDonadoras';
-import {DonanteDetalles} from './pages/DonanteDetalles';
+import { DonanteDetalles } from './pages/DonanteDetalles';
 import { EditarDonante } from './pages/EditarDonante';
 import { DonanteControl } from './pages/DonanteControl';
+import  ControlDetalles  from './pages/ControlDetalles';  // Importa el componente ControlDetalles
 
 function App() {
   const client = new ApolloClient({
@@ -27,6 +28,8 @@ function App() {
           <Route path="/DonanteDetalles/:id" element={<DonanteDetalles />} />
           <Route path="/EditarDonante/:id" element={<EditarDonante />} />
           <Route path="/agregarControl/:id" element={<DonanteControl />} />
+          {/* Agrega la nueva ruta para ControlDetalles */}
+          <Route path="/ControlDetalles/:id" element={<ControlDetalles />} />
         </Routes>
       </ApolloProvider>
     </Router>

@@ -1,32 +1,36 @@
-import {gql} from '@apollo/client'
+import { gql } from '@apollo/client';
 
-
-export const LOGIN =  gql`
-query login($email:String, $password: String){
-    login(email: $email, password: $password){
-        _id
-        email
-        password
+export const LOGIN = gql`
+  query login($email: String, $password: String) {
+    login(email: $email, password: $password) {
+      _id
+      email
+      password
     }
-}
-`
+  }
+`;
+
 // Donante
 
 export const GET_DONANTES = gql`
   query donantes {
     donantes {
-    _id 
-    tipo
-    firstName
-    lastName
-    sdg
+      _id
+      tipo
+      firstName
+      lastName
+      sdg
     }
   }
 `;
+
 export const GET_DONANTE = gql`
   query donante($id: ID!) {
     donante(id: $id) {
       _id
+      control {
+        _id
+      }
       tipo
       firstName
       lastName
@@ -52,29 +56,92 @@ export const GET_DONANTE = gql`
   }
 `;
 
-export const GET_CALIDADES = gql`
-  query GetCalidades {
-    getCalidades {
-      id
+// Control
+
+export const GET_CONTROLES = gql`
+  query controles {
+    controles {
+      _id
+      numeroLeche
+      tipoLeche
+      tipoDonacion
+      donadora
+      ml
+      fechaExtraccion
+      horaExtraccion
+      sdg
+      embalaje
+      suciedad
+      color
+      olor
+      crematocrito
+      acidezDornic
+      observaciones
       donante {
         _id
         firstName
+        lastName
       }
-      sdg
-      
+      createdAt
+      updatedAt
     }
   }
 `;
 
-export const GET_CALIDAD = gql`
-  query GetCalidad($id: ID!) {
-    getCalidad(id: $id) {
+export const GET_CONTROL = gql`
+  query control($id: ID!) {
+    control(id: $id) {
       _id
-      donante {
-        
-        firstName
-      }
+      numeroLeche
+      tipoLeche
+      tipoDonacion
+      donadora
+      ml
+      fechaExtraccion
+      horaExtraccion
       sdg
+      embalaje
+      suciedad
+      color
+      olor
+      crematocrito
+      acidezDornic
+      observaciones
+      
+      createdAt
+      updatedAt
     }
   }
 `;
+
+export const GET_CONTROL_POR_DONANTE = gql`
+  query controlPorDonante($donanteId: ID!) {
+    controlPorDonante(donanteId: $donanteId) {
+      _id
+      numeroLeche
+      tipoLeche
+      tipoDonacion
+      donadora
+      ml
+      fechaExtraccion
+      horaExtraccion
+      sdg
+      embalaje
+      suciedad
+      color
+      olor
+      crematocrito
+      acidezDornic
+      observaciones
+      donante {
+        _id
+        firstName
+        lastName
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+
