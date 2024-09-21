@@ -9,11 +9,14 @@ const RegistroDonadoras = () => {
   const [deleteDonante] = useMutation(DELETE_DONANTE);
 
   const handleDeleteDonante = async (donanteId) => {
-    try {
-      await deleteDonante({ variables: { id: donanteId } });  // Usa `id`
-      refetch(); // Refetch the donor list after deletion
-    } catch (error) {
-      console.error("Error deleting donor:", error);
+    const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar esta donadora?");
+    if (confirmDelete) {
+      try {
+        await deleteDonante({ variables: { id: donanteId } });  // Usa `id`
+        refetch(); // Refresca la lista de donantes después de eliminar
+      } catch (error) {
+        console.error("Error al eliminar donante:", error);
+      }
     }
   };
 
@@ -58,7 +61,7 @@ const RegistroDonadoras = () => {
                     </Link>
                     <button
                       className="btn btn-danger"
-                      onClick={() => handleDeleteDonante(donante._id)} // Cambia _id a id
+                      onClick={() => handleDeleteDonante(donante._id)} // Llamada con confirmación
                     >
                       <i className="bi bi-trash"></i> Borrar
                     </button>
