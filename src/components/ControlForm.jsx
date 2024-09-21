@@ -16,16 +16,16 @@ export const ControlForm = () => {
     variables: { id },
   });
 
-  // Estado para el formulario
+  // Estado para el formulario, incluyendo todos los campos obligatorios
   const [input, setInput] = useState({
     numeroLeche: '',
     tipoLeche: 'MADURA',
     tipoDonacion: 'INTERNA',
-    donadora: '',
+    donadora: '',  // Campo obligatorio según el esquema
     ml: '',
     fechaExtraccion: '',
     horaExtraccion: '',
-    sdg: '',
+    sdg: '',  // Campo obligatorio según el esquema
     embalaje: 'CUMPLE',
     suciedad: 'CUMPLE',
     color: 'CUMPLE',
@@ -33,7 +33,7 @@ export const ControlForm = () => {
     crematocrito: '',
     acidezDornic: '',
     observaciones: 'NA',
-    // No incluir donanteId aquí
+    donanteId: '' // Campo obligatorio según el esquema
   });
 
   // Mutación para actualizar el control
@@ -49,11 +49,11 @@ export const ControlForm = () => {
         numeroLeche: control.numeroLeche || '',
         tipoLeche: control.tipoLeche || 'MADURA',
         tipoDonacion: control.tipoDonacion || 'INTERNA',
-        donadora: `${donante.firstName} ${donante.lastName}`,
+        donadora: `${donante.firstName} ${donante.lastName}`, // Usar valor actual de donadora
         ml: control.ml || '',
         fechaExtraccion: control.fechaExtraccion ? control.fechaExtraccion.substr(0, 10) : '',
         horaExtraccion: control.horaExtraccion || '',
-        sdg: donante.sdg || '',
+        sdg: donante.sdg || '', // Usar valor actual de sdg
         embalaje: control.embalaje || 'CUMPLE',
         suciedad: control.suciedad || 'CUMPLE',
         color: control.color || 'CUMPLE',
@@ -61,7 +61,7 @@ export const ControlForm = () => {
         crematocrito: control.crematocrito || '',
         acidezDornic: control.acidezDornic || '',
         observaciones: control.observaciones || 'NA',
-        // No incluir donanteId aquí
+        donanteId: donante._id // Usar valor actual del donanteId
       });
     }
   }, [data]);
@@ -71,7 +71,7 @@ export const ControlForm = () => {
 
     // Convertir campos numéricos a Float si no están vacíos
     const newValue =
-      ['ml', 'crematocrito', 'acidezDornic', 'sdg'].includes(name)
+      ['ml', 'crematocrito', 'acidezDornic'].includes(name)
         ? value === '' ? '' : parseFloat(value)
         : value;
 
@@ -92,13 +92,10 @@ export const ControlForm = () => {
         return;
       }
 
-      // Excluir donanteId del input
-      const { donanteId, ...inputWithoutDonanteId } = input;
-
       await updateControl({
         variables: {
           id: controlId,
-          input: inputWithoutDonanteId, // Usar el input sin donanteId
+          input: input, // Asegúrate de que se están enviando todos los campos obligatorios
         },
       });
 
@@ -174,17 +171,6 @@ export const ControlForm = () => {
 
       <div className="row mb-3">
         <div className="col-md-4">
-          <label htmlFor="donadora">Donadora</label>
-          <input
-            type="text"
-            className="form-control"
-            id="donadora"
-            name="donadora"
-            value={input.donadora}
-            readOnly
-          />
-        </div>
-        <div className="col-md-4">
           <label htmlFor="ml">Cantidad (mL)</label>
           <input
             type="number"
@@ -197,20 +183,6 @@ export const ControlForm = () => {
           />
         </div>
         <div className="col-md-4">
-          <label htmlFor="sdg">SDG</label>
-          <input
-            type="number"
-            className="form-control"
-            id="sdg"
-            name="sdg"
-            value={input.sdg}
-            readOnly
-          />
-        </div>
-      </div>
-
-      <div className="row mb-3">
-        <div className="col-md-6">
           <label htmlFor="fechaExtraccion">Fecha de Extracción</label>
           <input
             type="date"
@@ -222,7 +194,7 @@ export const ControlForm = () => {
             required
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-4">
           <label htmlFor="horaExtraccion">Hora de Extracción</label>
           <input
             type="time"
