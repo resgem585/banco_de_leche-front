@@ -29,9 +29,14 @@ const DonanteDetails = () => {
           <div className="btn-group me-2">
             {/* Botón dinámico dependiendo de si existe un control o no */}
             {controlId ? (
-              <Link to={`/ControlDetalles/${controlId}`} className="btn btn-sm btn-primary">
-                Ver Control
-              </Link>
+              <>
+                <Link to={`/ControlDetalles/${controlId}`} className="btn btn-sm btn-primary me-2">
+                  Ver Control
+                </Link>
+                <Link to={`/agregarCromatocrito/${controlId}`} className="btn btn-sm btn-secondary">
+                  Agregar Cromatocrito
+                </Link>
+              </>
             ) : (
               <Link to={`/agregarControl/${donante._id}`} className="btn btn-sm btn-primary">
                 Agregar Control

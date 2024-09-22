@@ -157,3 +157,32 @@ export const UPDATE_CONTROL = gql`
     }
   }
 `;
+
+
+// Mutación para crear un nuevo registro de Crematocrito
+export const CREATE_CREMATOCRITO = gql`
+  mutation createCrematocrito($input: CrematocritoInput!) {
+    createCrematocrito(input: $input) {
+      _id
+      columnaTotal1
+      columnaTotal2
+      columnaTotal3
+      promTotal      # Promedio total
+      columnaCrema1
+      columnaCrema2
+      columnaCrema3
+      promCrema      # Promedio de crema
+      porcentajeCrema
+      porcentajeGrasa
+      kcalLitro      # Campo ajustado según el esquema
+      observaciones
+      numeroLeche {  # Relación con el control, obtiene el campo número de leche
+        _id
+        numeroLeche
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+

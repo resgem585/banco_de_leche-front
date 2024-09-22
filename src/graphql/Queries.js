@@ -144,4 +144,28 @@ export const GET_CONTROL_POR_DONANTE = gql`
   }
 `;
 
-
+export const GET_CREMATOCRITO = gql`
+  query crematocrito($id: ID!) {
+    crematocrito(id: $id) {
+      _id
+      numeroLeche {
+        _id
+        numeroLeche
+      }
+      columnaTotal1
+      columnaTotal2
+      columnaTotal3
+      promTotal
+      columnaCrema1
+      columnaCrema2
+      columnaCrema3
+      promCrema
+      porcentajeCrema
+      porcentajeGrasa
+      kcalLitro
+      observaciones
+      createdAt
+      updatedAt
+    }
+  }
+`;
