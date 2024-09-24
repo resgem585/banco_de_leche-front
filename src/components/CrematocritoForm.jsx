@@ -39,7 +39,7 @@ const CrematocritoForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createCrematocrito({
+      const { data } = await createCrematocrito({
         variables: {
           input: {
             ...input,
@@ -47,14 +47,16 @@ const CrematocritoForm = () => {
           },
         },
       });
+
+      const newCrematocritoId = data.createCrematocrito._id; // Obtener el ID del nuevo crematocrito
       alert('Crematocrito agregado con éxito');
-      navigate(`/CrematocritoDetalles/${controlId}`);
+      navigate(`/CrematocritoDetalles/${newCrematocritoId}`); // Redirigir a los detalles del crematocrito
     } catch (error) {
       console.error('Error al crear el crematocrito:', error);
       alert('Error al crear el crematocrito. Por favor, intenta nuevamente.');
     }
   };
-  
+
   return (
     <div className="container">
       <h2>Agregar Crematocrito</h2>
