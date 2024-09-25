@@ -10,7 +10,9 @@ import { EditarDonante } from './pages/EditarDonante';
 import { DonanteControl } from './pages/DonanteControl';
 import ControlDetalles from './pages/ControlDetalles'; // Importa el componente ControlDetalles
 import DonanteCrematocrito from './pages/DonanteCrematocrito'; // Importa el componente DonanteCromatocrito
-import CrematocritoDetalles from './pages/CrematocritoDetalles'; // Importa el componente CrematocritoDetalles
+import CrematocritoDetalles from './pages/CrematocritoDetalles';
+import Acidez from './pages/Acidez';
+import AcidezDetalles from './pages/AcidezDetalles';// Importa el componente CrematocritoDetalles
 
 function App() {
   const client = new ApolloClient({
@@ -34,6 +36,8 @@ function App() {
           <Route path="/agregarCrematocrito/:id" element={<DonanteCrematocrito />} />
           {/* Nueva ruta para ver detalles del Cromatocrito */}
           <Route path="/CrematocritoDetalles/:id" element={<CrematocritoDetalles />} />
+          <Route path="/agregarAcidez/:id" element={<Acidez />} />
+          <Route path="/AcidezDetalles/:id" element={<AcidezDetalles />} />
         </Routes>
       </ApolloProvider>
     </Router>

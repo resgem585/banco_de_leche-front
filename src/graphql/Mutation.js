@@ -183,6 +183,28 @@ export const CREATE_CREMATOCRITO = gql`
       createdAt
       updatedAt
     }
-  }
+  },
+
+  
 `;
 
+export const CREATE_ACIDEZDORNIC = gql`
+  mutation createAcidezDornic($input: AcidezDornicInput!) {
+    createAcidezDornic(input: $input) {
+      _id
+      numeroLeche {
+        _id
+        numeroLeche
+      }
+      m1
+      m2
+      m3
+      prom
+      fact
+      resultado
+      obs
+      createdAt
+      updatedAt
+    }
+  }
+`;

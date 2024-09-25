@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_DONANTE } from '../graphql/Queries';
@@ -10,7 +9,7 @@ const DonanteDetails = () => {
     variables: { id }, // Usar el ID en las variables de la consulta
   });
 
-  if (loading) return "Cargando detalles de la donante...";
+  if (loading) return 'Cargando detalles de la donante...';
   if (error) return `Error: ${error.message}`;
 
   if (!data || !data.donante) {
@@ -23,6 +22,10 @@ const DonanteDetails = () => {
   const crematocritoId =
     donante.control && donante.control.crematocritoData
       ? donante.control.crematocritoData._id
+      : null;
+  const acidezDornicId =
+    donante.control && donante.control.acidezDornicData
+      ? donante.control.acidezDornicData._id
       : null;
 
   return (
@@ -53,9 +56,32 @@ const DonanteDetails = () => {
                 {/* Botón Ver Crematocrito */}
                 <Link
                   to={`/CrematocritoDetalles/${crematocritoId || controlId}`}
-                  className="btn btn-sm btn-secondary"
+                  className="btn btn-sm btn-secondary me-2"
                 >
                   Ver Crematocrito
+                </Link>
+                {/* Botón Agregar o Ver Acidez Dornic */}
+                {acidezDornicId ? (
+                  <Link
+                    to={`/AcidezDetalles/${acidezDornicId}`}
+                    className="btn btn-sm btn-secondary me-2"
+                  >
+                    Ver Acidez Dornic
+                  </Link>
+                ) : (
+                  <Link
+                    to={`/agregarAcidez/${controlId}`}
+                    className="btn btn-sm btn-secondary me-2"
+                  >
+                    Agregar Acidez
+                  </Link>
+                )}
+                {/* Botón para probar la ruta de AcidezDetails */}
+                <Link
+                  to={`/AcidezDetalles/${controlId}`}
+                  className="btn btn-sm btn-secondary"
+                >
+                  Ir a AcidezDetails
                 </Link>
               </>
             ) : (

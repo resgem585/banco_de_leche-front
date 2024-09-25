@@ -1,7 +1,18 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
+
+// USER
+export const GET_USERS = gql`
+  query GetUser {
+    getUser {
+      _id
+      email
+      password
+    }
+  }
+`;
 
 export const LOGIN = gql`
-  query login($email: String, $password: String) {
+  query Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       _id
       email
@@ -10,27 +21,11 @@ export const LOGIN = gql`
   }
 `;
 
-// Donante
-
+// DONANTE
 export const GET_DONANTES = gql`
-  query donantes {
+  query Donantes {
     donantes {
       _id
-      tipo
-      firstName
-      lastName
-      sdg
-    }
-  }
-`;
-
-export const GET_DONANTE = gql`
-  query donante($id: ID!) {
-    donante(id: $id) {
-      _id
-      control {
-        _id
-      }
       tipo
       firstName
       lastName
@@ -56,10 +51,65 @@ export const GET_DONANTE = gql`
   }
 `;
 
-// Control
+export const GET_DONANTE = gql`
+  query Donante($id: ID!) {
+    donante(id: $id) {
+      _id
+      tipo
+      firstName
+      lastName
+      edad
+      direccion
+      ocupacion
+      partos
+      cesareas
+      apellidosRNLactante
+      sdg
+      fechaNacimRN
+      complicacionesEmbarazo
+      transfusionesUltimos5Anos
+      tatuajesPiercingsAcupunturaUltimoAno
+      tratamientoMedico
+      pruebaRapidaSifilis
+      pruebaRapidaVIH
+      pruebaRapidaHepatitisC
+      observaciones
+      control {
+        _id
+        numeroLeche
+        tipoLeche
+        tipoDonacion
+        donadora
+        ml
+        fechaExtraccion
+        horaExtraccion
+        sdg
+        embalaje
+        suciedad
+        color
+        olor
+        crematocrito
+        acidezDornic
+        observaciones
+        crematocritoData {
+          _id
+          porcentajeGrasa
+          kcalLitro
+        }
+        acidezDornicData {
+          _id
+          resultado
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 
+// CONTROL
 export const GET_CONTROLES = gql`
-  query controles {
+  query Controles {
     controles {
       _id
       numeroLeche
@@ -82,6 +132,15 @@ export const GET_CONTROLES = gql`
         firstName
         lastName
       }
+      crematocritoData {
+        _id
+        porcentajeGrasa
+        kcalLitro
+      }
+      acidezDornicData {
+        _id
+        resultado
+      }
       createdAt
       updatedAt
     }
@@ -89,34 +148,8 @@ export const GET_CONTROLES = gql`
 `;
 
 export const GET_CONTROL = gql`
-  query control($id: ID!) {
+  query Control($id: ID!) {
     control(id: $id) {
-      _id
-      numeroLeche
-      tipoLeche
-      tipoDonacion
-      donadora
-      ml
-      fechaExtraccion
-      horaExtraccion
-      sdg
-      embalaje
-      suciedad
-      color
-      olor
-      crematocrito
-      acidezDornic
-      observaciones
-      
-      createdAt
-      updatedAt
-    }
-  }
-`;
-
-export const GET_CONTROL_POR_DONANTE = gql`
-  query controlPorDonante($donanteId: ID!) {
-    controlPorDonante(donanteId: $donanteId) {
       _id
       numeroLeche
       tipoLeche
@@ -138,6 +171,42 @@ export const GET_CONTROL_POR_DONANTE = gql`
         firstName
         lastName
       }
+      crematocritoData {
+        _id
+        porcentajeGrasa
+        kcalLitro
+      }
+      acidezDornicData {
+        _id
+        resultado
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+// CREMATOCRITO
+export const GET_CREMATOCRITOS = gql`
+  query Crematocritos {
+    crematocritos {
+      _id
+      numeroLeche {
+        _id
+        numeroLeche
+      }
+      columnaTotal1
+      columnaTotal2
+      columnaTotal3
+      promTotal
+      columnaCrema1
+      columnaCrema2
+      columnaCrema3
+      promCrema
+      porcentajeCrema
+      porcentajeGrasa
+      kcalLitro
+      observaciones
       createdAt
       updatedAt
     }
@@ -145,7 +214,7 @@ export const GET_CONTROL_POR_DONANTE = gql`
 `;
 
 export const GET_CREMATOCRITO = gql`
-  query crematocrito($id: ID!) {
+  query Crematocrito($id: ID!) {
     crematocrito(id: $id) {
       _id
       numeroLeche {
@@ -164,6 +233,49 @@ export const GET_CREMATOCRITO = gql`
       porcentajeGrasa
       kcalLitro
       observaciones
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+// ACIDEZ DORNIC
+export const GET_ACIDEZDORNICS = gql`
+  query AcidecesDornic {
+    acidecesDornic {
+      _id
+      numeroLeche {
+        _id
+        numeroLeche
+      }
+      m1
+      m2
+      m3
+      prom
+      fact
+      resultado
+      obs
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const GET_ACIDEZDORNIC = gql`
+  query AcidezDornic($id: ID!) {
+    acidezDornic(id: $id) {
+      _id
+      numeroLeche {
+        _id
+        numeroLeche
+      }
+      m1
+      m2
+      m3
+      prom
+      fact
+      resultado
+      obs
       createdAt
       updatedAt
     }

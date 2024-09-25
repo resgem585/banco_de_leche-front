@@ -20,12 +20,7 @@ const SideBar = () => {
               </svg>
               <span>Lista de Donadoras</span>
             </Link>
-            <Link to="/ListaCalidades" className="flex items-center px-4 py-2 rounded-md hover:bg-purple-600 transition-colors">
-              <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
-                {/* Icon SVG path goes here */}
-              </svg>
-              <span>Lista Calidades</span>
-            </Link>
+            
           </nav>
         </div>
       </div>
