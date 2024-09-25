@@ -1,10 +1,11 @@
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_DONANTE } from '../graphql/Queries';
 import moment from 'moment';
 
 const DonanteDetails = () => {
-  const { id } = useParams(); // Obtener el ID de la donante desde la URL
+  const { id } = useParams(); // Obtener el ID del donante desde la URL
   const { loading, error, data } = useQuery(GET_DONANTE, {
     variables: { id }, // Usar el ID en las variables de la consulta
   });
@@ -19,7 +20,10 @@ const DonanteDetails = () => {
   const donante = data.donante;
   console.log('Donante data:', donante); // Para depuración
   const controlId = donante.control ? donante.control._id : null; // Extraer el controlId si existe
-  const crematocritoId = donante.control && donante.control.crematocritoData ? donante.control.crematocritoData._id : null;
+  const crematocritoId =
+    donante.control && donante.control.crematocritoData
+      ? donante.control.crematocritoData._id
+      : null;
 
   return (
     <div className="container">
@@ -33,23 +37,32 @@ const DonanteDetails = () => {
             {controlId ? (
               <>
                 {/* Botón Ver Control */}
-                <Link to={`/ControlDetalles/${controlId}`} className="btn btn-sm btn-primary me-2">
+                <Link
+                  to={`/ControlDetalles/${controlId}`}
+                  className="btn btn-sm btn-primary me-2"
+                >
                   Ver Control
                 </Link>
                 {/* Botón Agregar Crematocrito */}
-                <Link to={`/agregarCrematocrito/${controlId}`} className="btn btn-sm btn-secondary me-2">
+                <Link
+                  to={`/agregarCrematocrito/${controlId}`}
+                  className="btn btn-sm btn-secondary me-2"
+                >
                   Agregar Crematocrito
                 </Link>
                 {/* Botón Ver Crematocrito */}
                 <Link
-                  to={crematocritoId ? `/CrematocritoDetalles/${crematocritoId}` : '#'}
-                  className={`btn btn-sm btn-secondary${!crematocritoId ? ' disabled' : ''}`}
+                  to={`/CrematocritoDetalles/${crematocritoId || controlId}`}
+                  className="btn btn-sm btn-secondary"
                 >
                   Ver Crematocrito
                 </Link>
               </>
             ) : (
-              <Link to={`/agregarControl/${donante._id}`} className="btn btn-sm btn-primary">
+              <Link
+                to={`/agregarControl/${donante._id}`}
+                className="btn btn-sm btn-primary"
+              >
                 Agregar Control
               </Link>
             )}
@@ -73,7 +86,10 @@ const DonanteDetails = () => {
             </nav>
           </div>
           <div className="col text-end fw-lighter">
-            <b>Última Actualización: {moment(donante.updatedAt).format('LLLL [hrs]')}</b>
+            <b>
+              Última Actualización:{' '}
+              {moment(donante.updatedAt).format('LLLL [hrs]')}
+            </b>
           </div>
         </div>
       </div>
@@ -83,7 +99,9 @@ const DonanteDetails = () => {
         {/* Tipo */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Tipo:</b></div>
+            <div className="col-3">
+              <b>Tipo:</b>
+            </div>
             <div className="col">{donante.tipo}</div>
           </div>
         </li>
@@ -91,7 +109,9 @@ const DonanteDetails = () => {
         {/* Apellidos */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Apellidos:</b></div>
+            <div className="col-3">
+              <b>Apellidos:</b>
+            </div>
             <div className="col">{donante.lastName}</div>
           </div>
         </li>
@@ -99,7 +119,9 @@ const DonanteDetails = () => {
         {/* Nombre */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Nombre:</b></div>
+            <div className="col-3">
+              <b>Nombre:</b>
+            </div>
             <div className="col">{donante.firstName}</div>
           </div>
         </li>
@@ -107,7 +129,9 @@ const DonanteDetails = () => {
         {/* Edad */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Edad:</b></div>
+            <div className="col-3">
+              <b>Edad:</b>
+            </div>
             <div className="col">{donante.edad}</div>
           </div>
         </li>
@@ -115,7 +139,9 @@ const DonanteDetails = () => {
         {/* Dirección */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Dirección:</b></div>
+            <div className="col-3">
+              <b>Dirección:</b>
+            </div>
             <div className="col">{donante.direccion}</div>
           </div>
         </li>
@@ -123,7 +149,9 @@ const DonanteDetails = () => {
         {/* Ocupación */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Ocupación:</b></div>
+            <div className="col-3">
+              <b>Ocupación:</b>
+            </div>
             <div className="col">{donante.ocupacion}</div>
           </div>
         </li>
@@ -131,7 +159,9 @@ const DonanteDetails = () => {
         {/* Partos */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Partos:</b></div>
+            <div className="col-3">
+              <b>Partos:</b>
+            </div>
             <div className="col">{donante.partos}</div>
           </div>
         </li>
@@ -139,7 +169,9 @@ const DonanteDetails = () => {
         {/* Cesáreas */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Cesáreas:</b></div>
+            <div className="col-3">
+              <b>Cesáreas:</b>
+            </div>
             <div className="col">{donante.cesareas}</div>
           </div>
         </li>
@@ -147,7 +179,9 @@ const DonanteDetails = () => {
         {/* Apellidos RN Lactante */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Apellidos RN Lactante:</b></div>
+            <div className="col-3">
+              <b>Apellidos RN Lactante:</b>
+            </div>
             <div className="col">{donante.apellidosRNLactante}</div>
           </div>
         </li>
@@ -155,7 +189,9 @@ const DonanteDetails = () => {
         {/* SDG */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>SDG:</b></div>
+            <div className="col-3">
+              <b>SDG:</b>
+            </div>
             <div className="col">{donante.sdg}</div>
           </div>
         </li>
@@ -163,9 +199,13 @@ const DonanteDetails = () => {
         {/* Fecha de Nacimiento RN */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Fecha de Nacimiento RN:</b></div>
+            <div className="col-3">
+              <b>Fecha de Nacimiento RN:</b>
+            </div>
             <div className="col">
-              {donante.fechaNacimRN ? moment(donante.fechaNacimRN).format('LL') : 'N/A'}
+              {donante.fechaNacimRN
+                ? moment(donante.fechaNacimRN).format('LL')
+                : 'N/A'}
             </div>
           </div>
         </li>
@@ -173,7 +213,9 @@ const DonanteDetails = () => {
         {/* Complicaciones de Embarazo */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Complicaciones de Embarazo:</b></div>
+            <div className="col-3">
+              <b>Complicaciones de Embarazo:</b>
+            </div>
             <div className="col">{donante.complicacionesEmbarazo}</div>
           </div>
         </li>
@@ -181,7 +223,9 @@ const DonanteDetails = () => {
         {/* Transfusiones en los últimos 5 años */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Transfusiones en los últimos 5 años:</b></div>
+            <div className="col-3">
+              <b>Transfusiones en los últimos 5 años:</b>
+            </div>
             <div className="col">{donante.transfusionesUltimos5Anos}</div>
           </div>
         </li>
@@ -189,15 +233,21 @@ const DonanteDetails = () => {
         {/* Tatuajes, Piercings o Acupuntura en el último año */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Tatuajes, Piercings o Acupuntura en el último año:</b></div>
-            <div className="col">{donante.tatuajesPiercingsAcupunturaUltimoAno}</div>
+            <div className="col-3">
+              <b>Tatuajes, Piercings o Acupuntura en el último año:</b>
+            </div>
+            <div className="col">
+              {donante.tatuajesPiercingsAcupunturaUltimoAno}
+            </div>
           </div>
         </li>
 
         {/* Tratamiento Médico */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Tratamiento Médico:</b></div>
+            <div className="col-3">
+              <b>Tratamiento Médico:</b>
+            </div>
             <div className="col">{donante.tratamientoMedico}</div>
           </div>
         </li>
@@ -205,7 +255,9 @@ const DonanteDetails = () => {
         {/* Prueba Rápida Sífilis */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Prueba Rápida Sífilis:</b></div>
+            <div className="col-3">
+              <b>Prueba Rápida Sífilis:</b>
+            </div>
             <div className="col">{donante.pruebaRapidaSifilis}</div>
           </div>
         </li>
@@ -213,7 +265,9 @@ const DonanteDetails = () => {
         {/* Prueba Rápida VIH */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Prueba Rápida VIH:</b></div>
+            <div className="col-3">
+              <b>Prueba Rápida VIH:</b>
+            </div>
             <div className="col">{donante.pruebaRapidaVIH}</div>
           </div>
         </li>
@@ -221,7 +275,9 @@ const DonanteDetails = () => {
         {/* Prueba Rápida Hepatitis C */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Prueba Rápida Hepatitis C:</b></div>
+            <div className="col-3">
+              <b>Prueba Rápida Hepatitis C:</b>
+            </div>
             <div className="col">{donante.pruebaRapidaHepatitisC}</div>
           </div>
         </li>
@@ -229,7 +285,9 @@ const DonanteDetails = () => {
         {/* Observaciones */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Observaciones:</b></div>
+            <div className="col-3">
+              <b>Observaciones:</b>
+            </div>
             <div className="col">{donante.observaciones}</div>
           </div>
         </li>
@@ -237,20 +295,20 @@ const DonanteDetails = () => {
         {/* Fecha de Creación */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Fecha de Creación:</b></div>
-            <div className="col">
-              {moment(donante.createdAt).format('LLL')}
+            <div className="col-3">
+              <b>Fecha de Creación:</b>
             </div>
+            <div className="col">{moment(donante.createdAt).format('LLL')}</div>
           </div>
         </li>
 
         {/* Última Modificación */}
         <li className="list-group-item">
           <div className="row">
-            <div className="col-3"><b>Última Modificación:</b></div>
-            <div className="col">
-              {moment(donante.updatedAt).format('LLL')}
+            <div className="col-3">
+              <b>Última Modificación:</b>
             </div>
+            <div className="col">{moment(donante.updatedAt).format('LLL')}</div>
           </div>
         </li>
       </ul>
