@@ -2,7 +2,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { GET_DONANTE } from '../graphql/Queries';
-import { UPDATE_CONTROL } from '../graphql/Mutation';
+import { CREATE_CONTROL } from '../graphql/Mutation'; // Cambia UPDATE_CONTROL a CREATE_CONTROL
 
 export const ControlForm = () => {
   const { id } = useParams(); // Donante ID obtenido de la URL
@@ -11,21 +11,21 @@ export const ControlForm = () => {
   // Estado para mostrar el mensaje de éxito
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  // Consulta para obtener los datos del donante y su control asociado
+  // Consulta para obtener los datos del donante
   const { data, loading, error } = useQuery(GET_DONANTE, {
     variables: { id },
   });
 
-  // Estado para el formulario
+  // Estado para el formulario, incluyendo todos los campos obligatorios
   const [input, setInput] = useState({
     numeroLeche: '',
     tipoLeche: 'MADURA',
     tipoDonacion: 'INTERNA',
-    donadora: '',
+    donadora: '',  // Campo obligatorio según el esquema
     ml: '',
     fechaExtraccion: '',
     horaExtraccion: '',
-    sdg: '',
+    sdg: '',  // Campo obligatorio según el esquema
     embalaje: 'CUMPLE',
     suciedad: 'CUMPLE',
     color: 'CUMPLE',
@@ -33,35 +33,34 @@ export const ControlForm = () => {
     crematocrito: '',
     acidezDornic: '',
     observaciones: 'NA',
-    // No incluir donanteId aquí
+    donanteId: '' // Campo obligatorio según el esquema
   });
 
-  // Mutación para actualizar el control
-  const [updateControl] = useMutation(UPDATE_CONTROL);
+  // Mutación para crear el control
+  const [createControl] = useMutation(CREATE_CONTROL);
 
-  // Efecto para prellenar el formulario con los datos existentes
+  // Efecto para prellenar el formulario con los datos del donante
   useEffect(() => {
     if (data && data.donante) {
       const donante = data.donante;
-      const control = donante.control || {};
 
       setInput({
-        numeroLeche: control.numeroLeche || '',
-        tipoLeche: control.tipoLeche || 'MADURA',
-        tipoDonacion: control.tipoDonacion || 'INTERNA',
-        donadora: `${donante.firstName} ${donante.lastName}`,
-        ml: control.ml || '',
-        fechaExtraccion: control.fechaExtraccion ? control.fechaExtraccion.substr(0, 10) : '',
-        horaExtraccion: control.horaExtraccion || '',
-        sdg: donante.sdg || '',
-        embalaje: control.embalaje || 'CUMPLE',
-        suciedad: control.suciedad || 'CUMPLE',
-        color: control.color || 'CUMPLE',
-        olor: control.olor || 'CUMPLE',
-        crematocrito: control.crematocrito || '',
-        acidezDornic: control.acidezDornic || '',
-        observaciones: control.observaciones || 'NA',
-        // No incluir donanteId aquí
+        numeroLeche: '',
+        tipoLeche: 'MADURA',
+        tipoDonacion: 'INTERNA',
+        donadora: `${donante.firstName} ${donante.lastName}`, // Usar valor actual de donadora
+        ml: '',
+        fechaExtraccion: '',
+        horaExtraccion: '',
+        sdg: donante.sdg || '', // Usar valor actual de sdg
+        embalaje: 'CUMPLE',
+        suciedad: 'CUMPLE',
+        color: 'CUMPLE',
+        olor: 'CUMPLE',
+        crematocrito: '',
+        acidezDornic: '',
+        observaciones: 'NA',
+        donanteId: donante._id // Usar valor actual del donanteId
       });
     }
   }, [data]);
@@ -71,7 +70,7 @@ export const ControlForm = () => {
 
     // Convertir campos numéricos a Float si no están vacíos
     const newValue =
-      ['ml', 'crematocrito', 'acidezDornic', 'sdg'].includes(name)
+      ['ml', 'crematocrito', 'acidezDornic'].includes(name)
         ? value === '' ? '' : parseFloat(value)
         : value;
 
@@ -85,45 +84,34 @@ export const ControlForm = () => {
     e.preventDefault();
 
     try {
-      const controlId = data.donante.control ? data.donante.control._id : null;
-
-      if (!controlId) {
-        console.error('No existe un control asociado para actualizar.');
-        return;
-      }
-
-      // Excluir donanteId del input
-      const { donanteId, ...inputWithoutDonanteId } = input;
-
-      await updateControl({
+      // Crear el nuevo control con los datos del formulario
+      const { data } = await createControl({
         variables: {
-          id: controlId,
-          input: inputWithoutDonanteId, // Usar el input sin donanteId
+          input: input, // Asegúrate de que se están enviando todos los campos obligatorios
         },
       });
 
-      console.log('Control actualizado con éxito.');
+      console.log('Control creado con éxito:', data);
 
       setShowSuccessMessage(true);
 
       // Redirigir a la página de detalles del control
-      navigate(`/ControlDetalles/${controlId}`);
+      navigate(`/ControlDetalles/${data.createControl._id}`);
     } catch (error) {
-      console.error('Error actualizando control:', error.message);
+      console.error('Error creando control:', error.message);
       console.error('Detalles del error:', error.graphQLErrors);
     }
   };
 
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error al cargar el donante.</p>;
-  if (!data.donante.control) return <p>No existe un control asociado a este donante.</p>;
 
   return (
     <form onSubmit={handleSubmit}>
       {/* Mostrar mensaje de éxito si corresponde */}
       {showSuccessMessage && (
         <div className="alert alert-success">
-          ¡Control actualizado exitosamente!
+          ¡Control creado exitosamente!
         </div>
       )}
 
@@ -174,17 +162,6 @@ export const ControlForm = () => {
 
       <div className="row mb-3">
         <div className="col-md-4">
-          <label htmlFor="donadora">Donadora</label>
-          <input
-            type="text"
-            className="form-control"
-            id="donadora"
-            name="donadora"
-            value={input.donadora}
-            readOnly
-          />
-        </div>
-        <div className="col-md-4">
           <label htmlFor="ml">Cantidad (mL)</label>
           <input
             type="number"
@@ -197,20 +174,6 @@ export const ControlForm = () => {
           />
         </div>
         <div className="col-md-4">
-          <label htmlFor="sdg">SDG</label>
-          <input
-            type="number"
-            className="form-control"
-            id="sdg"
-            name="sdg"
-            value={input.sdg}
-            readOnly
-          />
-        </div>
-      </div>
-
-      <div className="row mb-3">
-        <div className="col-md-6">
           <label htmlFor="fechaExtraccion">Fecha de Extracción</label>
           <input
             type="date"
@@ -222,7 +185,7 @@ export const ControlForm = () => {
             required
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-4">
           <label htmlFor="horaExtraccion">Hora de Extracción</label>
           <input
             type="time"
@@ -335,7 +298,7 @@ export const ControlForm = () => {
 
       {/* Botón de envío */}
       <button type="submit" className="btn btn-primary">
-        Actualizar Control
+        Crear Control
       </button>
     </form>
   );
