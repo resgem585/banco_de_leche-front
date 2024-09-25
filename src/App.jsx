@@ -9,7 +9,7 @@ import { DonanteDetalles } from './pages/DonanteDetalles';
 import { EditarDonante } from './pages/EditarDonante';
 import { DonanteControl } from './pages/DonanteControl';
 import ControlDetalles from './pages/ControlDetalles'; // Importa el componente ControlDetalles
-import DonanteCromatocrito from './pages/DonanteCromatocrito'; // Importa el componente DonanteCromatocrito
+import DonanteCrematocrito from './pages/DonanteCrematocrito'; // Importa el componente DonanteCromatocrito
 import CrematocritoDetalles from './pages/CrematocritoDetalles'; // Importa el componente CrematocritoDetalles
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
           <Route path="/EditarDonante/:id" element={<EditarDonante />} />
           <Route path="/agregarControl/:id" element={<DonanteControl />} />
           <Route path="/ControlDetalles/:id" element={<ControlDetalles />} />
-          <Route path="/agregarCromatocrito/:id" element={<DonanteCromatocrito />} />
+          <Route path="/agregarCrematocrito/:id" element={<DonanteCrematocrito />} />
           {/* Nueva ruta para ver detalles del Cromatocrito */}
           <Route path="/CrematocritoDetalles/:id" element={<CrematocritoDetalles />} />
         </Routes>

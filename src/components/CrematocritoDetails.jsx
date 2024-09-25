@@ -159,14 +159,7 @@ const CrematocritoDetails = () => {
         </li>
       </ul>
 
-      <div className="mt-3">
-        <Link to={`/EditarCrematocrito/${crematocrito._id}`} className="btn btn-warning me-2">
-          Editar Crematocrito
-        </Link>
-        <Link to={`/ControlDetalles/${crematocrito.numeroLeche._id}`} className="btn btn-secondary">
-          Volver a Detalles del Control
-        </Link>
-      </div>
+    
     </div>
   );
 };

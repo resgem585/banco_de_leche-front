@@ -1,16 +1,16 @@
 import SideBar from "../components/SideBar";
-import CromatocritoForm from "../components/CrematocritoForm";
+import CrematocritoForm from "../components/CrematocritoForm";
 
-const DonanteCromatocrito = () => {
+const DonanteCrematocrito = () => {
   return (
     <>
     <div className="app-container">
       <SideBar />
       <div className="content-container">
-        <CromatocritoForm />
+        <CrematocritoForm />
       </div>
     </div>
   </>
   )
 }
-export default DonanteCromatocrito
+export default DonanteCrematocrito
