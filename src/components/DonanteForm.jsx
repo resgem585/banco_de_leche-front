@@ -43,30 +43,30 @@ export const DonanteForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await createDonante({
-        variables: {
-          input: {
-            tipo,
-            firstName,
-            lastName,
-            edad: 30, // Ejemplo, sustituye con los datos reales
-            direccion: "123 Street",
-            ocupacion: "Engineer",
-            partos: 2,
-            cesareas: 1,
-            apellidosRNLactante: "Doe",
-            sdg: 36,
-            fechaNacimRN: "2024-08-08",
-            complicacionesEmbarazo: "None",
-            transfusionesUltimos5Anos: "No",
-            tatuajesPiercingsAcupunturaUltimoAno: "No",
-            tratamientoMedico: "None",
-            pruebaRapidaSifilis: "No Reactivo",
-            pruebaRapidaVIH: "No Reactivo",
-            pruebaRapidaHepatitisC: "No Reactivo",
-            observaciones: "None",
-          },
+      variables: {
+        input: {
+          tipo,
+          firstName,
+          lastName,
+          edad: parseInt(edad), // Asegúrate de convertir a número si es necesario
+          direccion,
+          ocupacion,
+          partos: parseInt(partos),
+          cesareas: parseInt(cesareas),
+          apellidosRNLactante,
+          sdg: parseInt(sdg),
+          fechaNacimRN,
+          complicacionesEmbarazo,
+          transfusionesUltimos5Anos,
+          tatuajesPiercingsAcupunturaUltimoAno,
+          tratamientoMedico,
+          pruebaRapidaSifilis,
+          pruebaRapidaVIH,
+          pruebaRapidaHepatitisC,
+          observaciones,
         },
-      });
+      },
+    });
 
     // Mostrar el mensaje de éxito
     setShowSuccessMessage(true);
